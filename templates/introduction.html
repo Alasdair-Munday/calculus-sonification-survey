@@ -1,0 +1,22 @@
+<h4>What's it all about?</h4>
+<div>
+    <p>
+        This test is a study  into the use of sound to help mathematics students learn the basics of calculus.
+        The idea is that the addition of related sounds adds insight into the features of the function as well as engaging the learner more deeply.
+
+        During the test, you will be shown graphs of mathematical functions with and without the sounds, and asked to answer some questions about the graphs.
+        The answers are timed in order to tell if the sounds helped you to answer more quickly or not.
+
+        Please make sure that your speakers or headphones are set to a comfortable level by using the test tone (triggered below).
+        When you have read and agreed to the user agreement below, press next.
+    </p>
+    <div class="well">
+        <h5>Test subject agreement</h5>
+        <small> By checking the box below, you acknowledge that you have set your own volume level and accept liability for any damage to your equipment or hearing as long as output levels do not exceed the volume of the test sound
+        </small>
+    </div>
+    <button ng-click="toggleSynth()">test tone</button>
+    <label for="agreement-checkbox">I Agree</label>
+    <input type="checkbox" ng-model="agreementChecked" id="agreement-checkbox">
+    <button class="btn btn-success" ng-disabled="!agreementChecked" ng-click="nextStage()">Continue</button>
+</div>
