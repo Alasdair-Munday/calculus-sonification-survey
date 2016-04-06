@@ -14,7 +14,15 @@ angular.module('app',[])
 
         $scope.toggleSynth = function(){
             synthComponent.toggle();
+        };
+
+        $scope.eqn = 'x^2';
+        $scope.graphVals = {};
+
+        $scope.break = function () {
+            var x= $scope.graphVals
         }
+
 
     }]);
 
