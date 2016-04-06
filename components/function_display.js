@@ -21,9 +21,6 @@ angular.module('app').directive('functionDisplay',function(){
         var fMax = 800;
         var fMin = 200;
 
-        var el=$element;
-        var attr = $attr;
-
         var graph;
         var axies = {
             xMin : -5,
