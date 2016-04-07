@@ -1,7 +1,31 @@
+<div class="col-sm-12">
+    <h2>What is sonification?</h2>
+    <p>Sonification is the use of sound to represent information. This project uses sounds to represent different features of mathematical graphs. The sounds are designed to help the listener see how the vertical (Y) values relate to the horizontal (X) values. </p>
+    <p>There are three different features represented in the sound:</p>
+    <ul>
+        <li>Y value</li>
+        <li>Slope (how Y is changing as X changes</li>
+        <li>Curve (how slope is changing as X changes)</li>
+    </ul>
+    <h2>What it sounds like</h2>
+    <p>
+        Choose the different graphs below to see how the different values affect the sound. Use the playback buttons or hover your pointer over the graph.
+    </p>
 
-<input class="form-control" ng-model="eqn">
-<h1>graph vals:{{graphVals.firstDerivative}}</h1>
-<function-display id="trainingGraph" equation-string="eqn" range-x="1" range-y="1" output="graphVals"></function-display>
-<function-display id="sinTest" equation-string="'sin(x)'" range-x="4" range-y="3"></function-display>
-<radial-gauge value="graphVals.y" min="0" max="1" label="'y'"></radial-gauge>
-<button ng-click="break()">Break</button>
+    <uib-tabset active="activeJustified" justified="true" class="text-center">
+        <uib-tab index="0" heading="Y value">
+            <p>The Y value is matched to the pitch of the note. This means that if you are listening to a higher point, the note will be higher.
+                Musically speaking: The note changes by two octaves from the bottom of the graph to the top, with the middle octave at 0.</p>
+            <h4>Y = <input type="number" ng-model="trainingValue" class="form-control" style="display:inline-block; width:100px;"></h4>
+            <function-display id="trainingY" equation-string="''+trainingValue" range-x="1" range-y="10"></function-display>
+        </uib-tab>
+        <uib-tab index="1" heading="Slope">
+            <h3>Y =  <input type="number" ng-model="trainingValue" class="form-control" style="display:inline-block; width:100px;">X</h3>
+            <function-display id="trainingSlope" equation-string="trainingValue+'*x'" range-y="1" range-x="1"></function-display>
+        </uib-tab>
+        <uib-tab index="2" heading ="Curve">
+            <h3>Y = <input type="number" ng-model="trainingValue" class="form-control" style="display:inline-block; width:100px;">/2X^2</h3>
+            <function-display id="trainingCurve" equation-string="trainingValue+'*(1/2)*x^2'" range-y="1" range-x="1"></function-display>
+        </uib-tab>
+    </uib-tabset>
+</div>

@@ -1,7 +1,7 @@
 /**
  * Created by alasd on 05/04/2016.
  */
-angular.module('app',[])
+angular.module('app',['ui.bootstrap'])
     .controller('testCtrl',["$scope","synthComponent",function($scope,synthComponent){
 
 
@@ -16,8 +16,8 @@ angular.module('app',[])
             synthComponent.toggle();
         };
 
-        $scope.eqn = 'x^2';
-        $scope.graphVals = {};
+
+        $scope.trainingValue = 1;
 
         $scope.break = function () {
             var x= $scope.graphVals

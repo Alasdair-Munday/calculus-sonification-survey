@@ -17,11 +17,10 @@ angular.module('app').directive('functionDisplay',function(){
 }).controller('functionDisplayCtrl',['synthComponent','$scope','$element','$attrs',
     function(synthComponent,$scope,$element,$attr){
         var synth  = synthComponent;
-
+        $scope.loop=true;
         var fMax = 800;
         var fMin = 200;
 
-        var graph;
         var axies = {
             xMin : -5,
             xMax : 5,
@@ -34,6 +33,12 @@ angular.module('app').directive('functionDisplay',function(){
         var options = {};
         function updateOptions(){
             options = {
+                data: [
+                    {
+                        fn: eqnString,
+                        color: "#ffffff"
+                    }
+                ],
                 target: '#'+ $attr.id+ " .function-plot",
                 yAxis: {domain: [axies.yMin, axies.yMax]},
                 xAxis: {domain: [axies.xMin, axies.xMax]},
@@ -41,7 +46,6 @@ angular.module('app').directive('functionDisplay',function(){
                 disableZoom: true
             }
         }
-        updateOptions();
 
         function sonifyEquation(){
             options.data = [{
@@ -49,27 +53,27 @@ angular.module('app').directive('functionDisplay',function(){
                 color: "#ffffff"
             }];
 
+            $scope.graph = functionPlot(options);
 
-            graph = functionPlot(options);
-
-            graph.on('mouseover',function(){
+            $scope.graph.on('mouseover', function () {
                 synth.start();
+                synth.setNoteRange(fMax, fMin, axies.yMax, axies.yMin)
             });
 
-            graph.on('mousemove',function(x,y){
+            $scope.graph.on('mousemove', function (x, y) {
                 setX(x);
             });
 
-            graph.on('mouseout',function(){
-                //if(!playId)
+            $scope.graph.on('mouseout', function () {
+                if(!playId)
                     synth.stop();
             });
 
         }
-        sonifyEquation();
 
         $scope.$watch("equationString", function(newValue, oldValue) {
             eqnString = newValue;
+            updateOptions();
             sonifyEquation();
         });
 
@@ -84,12 +88,7 @@ angular.module('app').directive('functionDisplay',function(){
             var deltafirstDerivative = (thirdY - deltaY)/0.001;
             var secondDerivativeVal = ( deltafirstDerivative - firstDerivativeVal)/ 0.001;
             options.annotations = [{x:x}];
-            var plot = functionPlot(options);
-            //firstDerivative.setData(firstDerivativeVal);
-            //secondDerivative.setData(secondDerivativeVal);
-            //xGauge.setData(x);
-            //yGauge.setData(yVal);
-
+            functionPlot(options);
 
             synth.sonifyValues(yVal,firstDerivativeVal,secondDerivativeVal);
             synth.panner.pan.value = (x)/axies.xMax;
@@ -104,27 +103,30 @@ angular.module('app').directive('functionDisplay',function(){
             }
         }
 
-        function setRange(parameterString,value){
+        //function setRange(parameterString,value){
+        //
+        //    switch(parameterString) {
+        //        case 'x':
+        //            axies.xMax = value;
+        //            axies.xMin = -value;
+        //            break;
+        //        case 'y' :
+        //            axies.yMax = value;
+        //            axies.yMin = -value;
+        //            break;
+        //    }
+        //    updateOptions();
+        //    sonifyEquation();
+        //}
 
-            switch(parameterString) {
-                case 'x':
-                    axies.xMax = value;
-                    axies.xMin = -value;
-                    break;
-                case 'y' :
-                    axies.yMax = value;
-                    axies.yMin = -value;
-                    synth.setNoteRange(fMax,fMin,axies.yMax,axies.yMin);
-                    break;
-            }
-            updateOptions();
-            sonifyEquation();
-
+        if ($scope.xRange) {
+            axies.xMax = $scope.xRange;
+            axies.xMin = -$scope.xRange;
         }
-        if($scope.xRange)
-            setRange('x',$scope.xRange);
-        if($scope.yRange)
-            setRange('y',$scope.yRange);
+        if ($scope.yRange) {
+            axies.yMax = $scope.yRange;
+            axies.yMin = -$scope.yRange;
+        }
 
         var playhead = axies.xMin;
         var playId = null;
@@ -134,6 +136,7 @@ angular.module('app').directive('functionDisplay',function(){
         $scope.play = function(){
             playId = setInterval(nextFrame,1/(sampleRate*1000));
             synth.start();
+            synth.setNoteRange(fMax,fMin,axies.yMax,axies.yMin);
         };
         $scope.pause = function(){
             clearInterval(playId);
@@ -154,10 +157,16 @@ angular.module('app').directive('functionDisplay',function(){
         function nextFrame(){
 
             if(playhead > axies.xMax)
-                $scope.stop();
+                $scope.loop ? $scope.reset(): $scope.stop();
 
             setX(playhead);
             playhead += (axies.xMax - axies.xMin)/(sampleRate*playtime);
         }
+
+
+
+        updateOptions();
+        sonifyEquation();
+
     }]);
 
