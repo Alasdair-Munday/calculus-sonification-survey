@@ -4,28 +4,52 @@
     <p>There are three different features represented in the sound:</p>
     <ul>
         <li>Y value</li>
-        <li>Slope (how Y is changing as X changes</li>
+        <li>Slope (how Y is changing as X changes)</li>
         <li>Curve (how slope is changing as X changes)</li>
     </ul>
     <h2>What it sounds like</h2>
     <p>
-        Choose the different graphs below to see how the different values affect the sound. Use the playback buttons or hover your pointer over the graph.
+        Choose the different graphs below to see how the different values affect the sound. Each graph shows a function with the chosen feature kept the same. Use the playback buttons or hover your pointer over the graph.
     </p>
 
     <uib-tabset active="activeJustified" justified="true" class="text-center">
         <uib-tab index="0" heading="Y value">
-            <p>The Y value is matched to the pitch of the note. This means that if you are listening to a higher point, the note will be higher.
-                Musically speaking: The note changes by two octaves from the bottom of the graph to the top, with the middle octave at 0.</p>
             <h4>Y = <input type="number" ng-model="trainingValue" class="form-control" style="display:inline-block; width:100px;"></h4>
             <function-display id="trainingY" equation-string="''+trainingValue" range-x="1" range-y="10"></function-display>
+            <p class="well col-sm-6 col-sm-offset-3">The Y value is matched to the pitch of the note. This means that if you are listening to a higher point, the note will be higher.
+                Musically speaking: The note changes by two octaves from the bottom of the graph to the top, with the middle octave at 0.</p>
         </uib-tab>
         <uib-tab index="1" heading="Slope">
-            <h3>Y =  <input type="number" ng-model="trainingValue" class="form-control" style="display:inline-block; width:100px;">X</h3>
-            <function-display id="trainingSlope" equation-string="trainingValue+'*x'" range-y="1" range-x="1"></function-display>
+            <h3 class="col-sm-12">Y =  <input type="number" ng-model="trainingValue" class="form-control" style="display:inline-block; width:100px;">X</h3>
+            <div class="col-sm-2">
+                <radial-gauge min="0" max="1" value="trainingSlopeOut.y" label="'Y = '"></radial-gauge>
+            </div>
+            <div class="col-sm-8">
+                <function-display id="trainingSlope" equation-string="trainingValue+'*x'" range-y="1" range-x="1" output="trainingSlopeOut"></function-display>
+            </div>
+            <div class="col-sm-2">
+                <radial-gauge min="0" max="1" label="'X = '" value="trainingSlopeOut.x"></radial-gauge>
+            </div>
+
+            <p class="well col-sm-6 col-sm-offset-3">The slope makes the sound wobble! The steeper the slope, the faster the wobble. Try changing the slope of the line to hear how the wobble changes speed.</p>
         </uib-tab>
         <uib-tab index="2" heading ="Curve">
             <h3>Y = <input type="number" ng-model="trainingValue" class="form-control" style="display:inline-block; width:100px;">/2X^2</h3>
-            <function-display id="trainingCurve" equation-string="trainingValue+'*(1/2)*x^2'" range-y="1" range-x="1"></function-display>
+            <div class="col-sm-2">
+                <radial-gauge min="0" max="1" value="trainingCurveOut.x" label="'X'"></radial-gauge>
+                <radial-gauge min="0" max="1" value="trainingCurveOut.y" label="'Y'"></radial-gauge>
+            </div>
+            <div class="col-sm-8">
+                <function-display output="trainingCurveOut" id="trainingCurve" equation-string="trainingValue+'*(1/2)*x^2'" range-y="1" range-x="1"></function-display>
+            </div>
+            <div class="col-sm-2">
+                <radial-gauge min="0" max="1" value="trainingCurveOut.firstDerivative" label="'Slope'"></radial-gauge>
+            </div>
+            <p class="well col-sm-6 col-sm-offset-3">When the line is curvy, the sound is made brighter. The more the slope changes in relation to x, the more the sound sounds like an aah rather than an ooh. Listen to the sound change as you change the curviness.</p>
         </uib-tab>
     </uib-tabset>
+</div>
+
+<div class="col-sm-12">
+    <button class="btn btn-success" ng-click="nextStage()">Continue to playground</button>
 </div>

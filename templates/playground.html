@@ -1,0 +1,32 @@
+<div class="col-sm-12">
+    <h3>Playground</h3>
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="input-group ">
+            <span class="input-group-addon">Y = </span>
+            <input class="form-control" placeholder="Enter function equation" ng-model="playgroundEquation">
+        </div>
+        <button class="btn btn-default" ng-click="playgroundEquation='x^3'">x^3</button>
+        <button class="btn btn-default" ng-click="playgroundEquation='sin(x)'">Sin(x)</button>
+        <button class="btn btn-default" ng-click="playgroundEquation='tanh(2*sin(x))/tanh(5)'">Example</button>
+    </div>
+    <button class="btn btn-success btn-lg" ng-click="nextStage()">Start Quiz</button>
+    <div class="col-sm-12">
+        <div class="col-sm-2">
+            <radial-gauge value="playgroundOut.x" min="0" max="5" label="'X'"></radial-gauge>
+            <radial-gauge value="playgroundOut.y" min="0" max="1" label="'Y'"></radial-gauge>
+        </div>
+        <div class="col-sm-8">
+            <function-display id="playgroundFunction" equation-string="playgroundEquation" output="playgroundOut"></function-display>
+        </div>
+        <div class="col-sm-2">
+            <radial-gauge value="playgroundOut.firstDerivative" min="0" max="10" label="'Slope'"></radial-gauge>
+            <radial-gauge value="playgroundOut.secondDerivative" min="0" max="10" label="'Curve'"></radial-gauge>
+        </div>
+    </div>
+
+    <span class="well col-sm-6 col-sm-offset-3">
+        Welcome to the playground! You can type any maths equation into the input box at the top of the screen and listen to the results!
+        When you are ready, press continue and start the quiz!
+    </span>
+
+</div>

@@ -103,21 +103,33 @@ angular.module('app').directive('functionDisplay',function(){
             }
         }
 
-        //function setRange(parameterString,value){
-        //
-        //    switch(parameterString) {
-        //        case 'x':
-        //            axies.xMax = value;
-        //            axies.xMin = -value;
-        //            break;
-        //        case 'y' :
-        //            axies.yMax = value;
-        //            axies.yMin = -value;
-        //            break;
-        //    }
-        //    updateOptions();
-        //    sonifyEquation();
-        //}
+        function setRange(parameterString,value){
+
+            switch(parameterString) {
+                case 'x':
+                    axies.xMax = value;
+                    axies.xMin = -value;
+                    break;
+                case 'y' :
+                    axies.yMax = value;
+                    axies.yMin = -value;
+                    break;
+            }
+            updateOptions();
+            sonifyEquation();
+        }
+
+        $scope.$watch('xRange',function(){
+            if($scope.xRange)
+                setRange('x',$scope.xRange);
+        });
+
+        $scope.$watch('yRange',function(){
+            if($scope.yRange)
+                setRange('y',$scope.yRange);
+        });
+
+
 
         if ($scope.xRange) {
             axies.xMax = $scope.xRange;

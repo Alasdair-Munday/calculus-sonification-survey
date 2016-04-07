@@ -5,7 +5,12 @@ angular.module('app',['ui.bootstrap'])
     .controller('testCtrl',["$scope","synthComponent",function($scope,synthComponent){
 
 
-        $scope.testStage = 1;
+        $scope.testStage = 3;
+
+        $scope.trainingSlopeOut = {};
+        $scope.trainingCurveOut = {};
+        $scope.playgroundEquation = "tanh(2*sin(x))/tanh(5)";
+        $scope.playgroundOut = {};
 
         $scope.nextStage = function(){
             $scope.testStage ++;

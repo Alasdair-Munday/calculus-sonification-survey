@@ -25,8 +25,8 @@ app.controller('gaugeCtrl',['$scope','$attrs','$element',function($scope,$attrs,
     var diameter = width < height ? width - padding :height - padding ;
     var label = $scope.label;
     var fontSize = 10;
-    var min = $scope.min | 0;
-    var max = $scope.max | 1;
+    var min = $scope.min = $scope.min | 0;
+    var max = $scope.max = $scope.max| 1;
     var centre = (min+max)/2;
     var parent = d3.select($element[0]);
 

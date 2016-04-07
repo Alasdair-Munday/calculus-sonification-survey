@@ -3,6 +3,9 @@ body{
     color: #fff;
 }
 
+.well{
+    color:black;
+}
 .btn-primary{
     background-color:#3048A1 ;
 }

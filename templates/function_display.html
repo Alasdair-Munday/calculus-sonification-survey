@@ -11,10 +11,12 @@
         <button type="button" class="btn btn-default" ng-click="play()">
             <span class="glyphicon glyphicon-play"></span>
         </button>
-        <button type="button" class="btn btn-default" ng-click="pause()">
+        <button type="button" class="btn btn-default" ng-click="pause()" >
             <span class="glyphicon glyphicon-pause"></span>
         </button>
+        <button type="button" class="btn btn-default" ng-model="loop" uib-btn-checkbox>
+            <span class="glyphicon glyphicon-repeat"></span>
+        </button>
     </div>
-    <input type="checkbox" ng-model="loop">
     </div>
 </div>
