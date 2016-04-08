@@ -1,0 +1,35 @@
+<div class="col-sm-12" ng-if="!submitted">
+    <ng-form>
+        <div class="col-sm-6 col-sm-offset-3 well">Finally, please answer the following questions. When you have finished, please press the submit button. Thankyou for taking part!</div>
+        <div class="form-group">
+            <label>How would you rate the helpfulness of the sounds for recognising mathematical features?
+                <br/>(0 being minimal,10 being essential, -1: prefer not to say)</label>
+            <input type="range" ng-model="postQuiz.mathsRatingPost" min="-1" max="10">
+            Rating: {{postQuiz.mathsRatingPost}}
+        </div>
+        <div class="form-group">
+            <label>How would you rate your experience of this study?
+                <br/>(0 being poor, 10 being good, -1: prefer not to say)</label>
+            <input type="range" ng-model="postQuiz.experienceRating" min="-1" max="10">
+            Rating: {{postQuiz.experienceRating}}
+        </div>
+        <div class="form-group">
+            <label>Please enter any comments regarding the aesthetics of the sounds</label>
+            <textarea class="form-control" ng-model="postQuiz.soundComments"></textarea>
+        </div>
+        <div class="form-group">
+            <label>How do you feel the sound affects your understanding of the maths?</label>
+            <textarea class="form-control" ng-model="postQuiz.mathsComments"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Any other comments / ideas about how these sounds could be used</label>
+            <textarea class="form-control" ng-model="postQuiz.otherComments"></textarea>
+        </div>
+        <button class="btn btn-lg btn-success" ng-click="submitResults()">Submit!</button>
+    </ng-form>
+</div>
+
+<div class="text-center" ng-show="submitted">
+    <h1>Submitted! Thank you for your participation!</h1>
+    <a class="btn btn-success btn-lg" href="http://alasdair-munday.github.io/WebAudio-Derivative-Sonification/">Go to the sonification playground!</a>
+</div>

@@ -1,0 +1,39 @@
+<div>
+    <div ng-hide="ready" class="col-sm-12 text-center">
+        <h3>Are you ready for the next question?</h3>
+        <p><small>Pressing the button will start the timer.</small></p>
+        <button class="btn btn-success btn-lg" ng-click="startQuestion()">Go!</button>
+    </div>
+    <div ng-if="ready">
+        <div class="col-sm-12 text-center">
+            <h2>Question: {{questionNumber}}</h2>
+            <h3>{{question.text}}</h3>
+        </div>
+        <div class="col-sm-2" >
+            <div ng-if="question.gauges">
+                <radial-gauge value="questionOut.x" min="0" max="5" label="'X'"></radial-gauge>
+                <radial-gauge value="questionOut.y" min="0" max="1" label="'Y'"></radial-gauge>
+            </div>
+        </div>
+        <div class="col-sm-8 text-center">
+            <h4>{{question.equation}}</h4>
+            <div ng-click="selectValue()">
+                <function-display  id="questionGraph" range-x="question.xRange" range-y="question.yRange" equation-string="question.equation" sonify="question.sonify" output="questionOut"></function-display>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div ng-if="question.gauges">
+                <radial-gauge value="questionOut.firstDerivative" min="0" max="10" label="'Slope'"></radial-gauge>
+                <radial-gauge value="questionOut.secondDerivative" min="0" max="10" label="'Curve'"></radial-gauge>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-show="question.answer" class="col-sm-6 col-sm-offset-3 welll well-lg">
+        <h4>You have Selected:</h4>
+        <h2>X = {{question.answer |number:2}}</h2>
+        <p class="col-sm-10">You may select a different answer or press continue to confirm this selection</p>
+        <button class="btn btn-success btn-lg col-sm-2" ng-click="nextQuestion()">Continue</button>
+    </div>
+</div>

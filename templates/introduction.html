@@ -12,10 +12,12 @@
     </p>
     <div class="well">
         <h5>Test subject agreement</h5>
-        <small> By checking the box below, you acknowledge that you have set your own volume level and accept liability for any damage to your equipment or hearing as long as output levels do not exceed the volume of the test sound
+        <small>
+            By checking the box below, you acknowledge that you have set your own volume level and accept liability for any damage to your equipment or hearing as long as output levels do not exceed the volume of the test sound.
+            You aknowledge that the results from this survey will be used anonymously and stored securely by the University of York. If you have any questions, please contact Alasdair Munday at: am1015@york.ac.uk. You do not have to answer any questions that you do not wish to and you may discontinue the test or withdraw your involvement at any time until your results have been submitted.
         </small>
     </div>
-    <button ng-click="toggleSynth()">test tone</button>
+    <button class="btn-lg btn btn-success" ng-click="toggleSynth()">test tone</button>
     <label for="agreement-checkbox">I Agree</label>
     <input type="checkbox" ng-model="agreementChecked" id="agreement-checkbox">
     <button class="btn btn-success" ng-disabled="!agreementChecked" ng-click="nextStage()">Continue</button>

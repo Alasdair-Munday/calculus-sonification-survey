@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<h2 class="text-center">User information</h2>
 
-</body>
-</html>
+<ng-form class="form-horizontal col-sm-12 col-md-6 col-md-offset-3">
+    <div class="well col-sm-12">Thank you for taking part in this survey! Before we start, please answer the following questions. Feel free not to answer any questions that you do not wish to.</div>
+    <div class="form-group">
+        <label>To what stage have you studied mathematics?</label>
+        <br/>
+        <label>
+            <input type="radio" ng-model="userInfo.mathsLevel" value="-1">
+            Prefer not to say
+        </label><br/>
+        <label>
+            <input type="radio" ng-model="userInfo.mathsLevel" value="0">
+            GCSE/O-Level C grade or less
+        </label><br/>
+        <label>
+            <input type="radio" ng-model="userInfo.mathsLevel" value="1">
+            GCSE/O-Level B grade or more
+        </label><br/>
+        <label>
+            <input type="radio" ng-model="userInfo.mathsLevel" value="2">
+            As-Level
+        </label><br/>
+        <label>
+            <input type="radio" ng-model="userInfo.mathsLevel" value="3">
+            A-Level
+        </label><br/>
+        <label>
+            <input type="radio" ng-model="userInfo.mathsLevel" value="4">
+            Degree involving Calculus
+        </label>
+        <br/>
+    </div>
+    <div class="form-group">
+        <label>How would you rate your understanding of calculus?
+            <br/>(0 being minimal,10 being expert, -1: prefer not to say)</label>
+        <input type="range" ng-model="userInfo.mathsOpinion" min="-1" max="10">
+        Rating: {{userInfo.mathsOpinion}}
+    </div>
+    <div class="form-group">
+        <label>
+            How would you rate your musical ability?<br>
+            (0 being minimal,10 being expert, -1: prefer not to say)
+        </label>
+        <input type="range" ng-model="userInfo.musicOpinion" min="-1" max="10">
+        Rating: {{userInfo.musicOpinion}}
+    </div>
+    <div class="form-group">
+        <label>
+            How would you rate your knowledge of musical synthesis?<br>
+            (0 being minimal,10 being expert, -1: prefer not to say)
+        </label>
+        <input type="range" ng-model="userInfo.synthesisOpinion" min="-1" max="10">
+        Rating: {{userInfo.synthesisOpinion}}
+    </div>
+
+    <div class="form-group">
+        <label for="age">How old are you?</label>
+        <input class="form-control col-sm-3" id="age" type="number" min="18" ng-model="userInfo.age">
+    </div>
+    <button class="btn btn-success" ng-really-message="Are you ready to continue?" ng-really-click="continue()">Continue</button>
+</ng-form>

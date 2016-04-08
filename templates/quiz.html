@@ -1,0 +1,5 @@
+<div ng-controller="quizCtrl">
+    <div ng-if="quizState===0" ng-include="'templates/Quiz/user_information.html'"></div>
+    <div ng-if="quizState===1" ng-include="'templates/Quiz/maths_question.html'"></div>
+    <div ng-if="quizState===2" ng-include="'templates/Quiz/post_quiz_questions.html'"></div>
+</div>

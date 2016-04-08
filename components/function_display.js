@@ -9,7 +9,8 @@ angular.module('app').directive('functionDisplay',function(){
             equationString: '=',
             yRange: '=rangeY',
             xRange: '=rangeX',
-            output: '='
+            output: '=?',
+            sonify: '=?'
 
         },
         controller:'functionDisplayCtrl'
@@ -20,6 +21,8 @@ angular.module('app').directive('functionDisplay',function(){
         $scope.loop=true;
         var fMax = 800;
         var fMin = 200;
+
+        var sonify = $scope.sonify = !($scope.sonify == false);
 
         var axies = {
             xMin : -5,
@@ -56,8 +59,10 @@ angular.module('app').directive('functionDisplay',function(){
             $scope.graph = functionPlot(options);
 
             $scope.graph.on('mouseover', function () {
-                synth.start();
-                synth.setNoteRange(fMax, fMin, axies.yMax, axies.yMin)
+                if(sonify) {
+                    synth.start();
+                    synth.setNoteRange(fMax, fMin, axies.yMax, axies.yMin)
+                }
             });
 
             $scope.graph.on('mousemove', function (x, y) {
@@ -65,7 +70,7 @@ angular.module('app').directive('functionDisplay',function(){
             });
 
             $scope.graph.on('mouseout', function () {
-                if(!playId)
+                if(!playId && sonify)
                     synth.stop();
             });
 
@@ -128,8 +133,6 @@ angular.module('app').directive('functionDisplay',function(){
             if($scope.yRange)
                 setRange('y',$scope.yRange);
         });
-
-
 
         if ($scope.xRange) {
             axies.xMax = $scope.xRange;
