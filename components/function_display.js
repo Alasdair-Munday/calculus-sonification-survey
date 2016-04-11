@@ -59,6 +59,7 @@ angular.module('app').directive('functionDisplay',function(){
             $scope.graph = functionPlot(options);
 
             $scope.graph.on('mouseover', function () {
+                $scope.$parent.$broadcast('newPlay');
                 if(sonify) {
                     synth.start();
                     synth.setNoteRange(fMax, fMin, axies.yMax, axies.yMin)
@@ -149,9 +150,11 @@ angular.module('app').directive('functionDisplay',function(){
         var sampleRate = 20;
         var reverse = false;
         $scope.play = function(){
+            $scope.$parent.$broadcast('newPlay');
             playId = setInterval(nextFrame,1/(sampleRate*1000));
             synth.start();
             synth.setNoteRange(fMax,fMin,axies.yMax,axies.yMin);
+
         };
         $scope.pause = function(){
             clearInterval(playId);
@@ -179,6 +182,13 @@ angular.module('app').directive('functionDisplay',function(){
         }
 
 
+        $scope.$on("$destroy", function handler() {
+            $scope.stop();
+        });
+
+        $scope.$on('newPlay', function() {
+            $scope.stop();
+        });
 
         updateOptions();
         sonifyEquation();
