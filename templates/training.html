@@ -19,12 +19,15 @@
     <uib-tabset active="activeJustified" justified="true" class="text-center">
         <uib-tab index="0" heading="Y value">
             <h4>Y = <input type="number" ng-model="trainingValue" class="form-control" style="display:inline-block; width:100px;"></h4>
+            <p class="text-center">Type a different number in the white box to hear how the sound changes</p>
             <function-display id="trainingY" equation-string="''+trainingValue" range-x="1" range-y="10"></function-display>
             <p class="well col-sm-6 col-sm-offset-3">The Y value is matched to the pitch of the note. This means that if you are listening to a higher point, the note will be higher.
                 Musically speaking: The note changes by two octaves from the bottom of the graph to the top, with the middle octave at 0.</p>
         </uib-tab>
         <uib-tab index="1" heading="Slope">
             <h3 class="col-sm-12">Y =  <input type="number" ng-model="trainingValue" class="form-control" style="display:inline-block; width:100px;">X</h3>
+            <p class="text-center">Type a different number in the white box to hear how the sound changes</p>
+
             <div class="col-sm-2">
                 <radial-gauge min="0" max="1" value="trainingSlopeOut.y" label="'Y = '"></radial-gauge>
             </div>
@@ -39,6 +42,7 @@
         </uib-tab>
         <uib-tab index="2" heading ="Curve">
             <h3>Y = <input type="number" ng-model="trainingValue" class="form-control" style="display:inline-block; width:100px;">/2X^2</h3>
+            <p class="text-center">Type a different number in the white box to hear how the sound changes</p>
             <div class="col-sm-2">
                 <radial-gauge min="0" max="1" value="trainingCurveOut.x" label="'X'"></radial-gauge>
                 <radial-gauge min="0" max="1" value="trainingCurveOut.y" label="'Y'"></radial-gauge>
